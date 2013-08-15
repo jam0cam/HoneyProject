@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Honey</string>
+    <string name="action_settings">Settings</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="title_activity_view_payee_list">View Payees</string>
+    <string name="url_local">http://10.0.2.2:9000/service/login</string>
+    <string name="url_login">http://honey.elasticbeanstalk.com/service/login</string>
+    <string name="url_get_payee">http://honey.elasticbeanstalk.com/finance/service/payee/getAllPayees/userId/</string>
+    <string name="title_activity_view_payee">View Payees</string>
+
+</resources>
