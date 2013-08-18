@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 import com.finance.model.Payee;
 import com.honey.R;
+import com.honey.activity.ViewPayeeListActivity;
 
 /**
  * Created by jitse on 8/16/13.
@@ -33,9 +34,7 @@ public class PayeeDetailFragment extends Fragment {
         txtPhone = (TextView)view.findViewById(R.id.txtPhone);
         txtAccount = (TextView)view.findViewById(R.id.txtAccount);
 
-        if (savedInstanceState != null) {
-            payee = (Payee)savedInstanceState.getSerializable("payee");
-        }
+        payee = ((ViewPayeeListActivity)getActivity()).getSelectedPayee();
         if (payee != null) {
             reDraw();
         }
@@ -56,14 +55,9 @@ public class PayeeDetailFragment extends Fragment {
         reDraw();
     }
 
-    public void setPayee(Payee payee) {
-        this.payee = payee;
-    }
-
     public void reDraw() {
         if (txtName != null) {
             mMainView.setVisibility(View.VISIBLE);
-            //Util.showProgress(false, mProgressView, mMainView, animationTime);
             txtName.setText(payee.getName());
             txtPhone.setText(payee.getPhone());
             txtAccount.setText(payee.getAccountNumber());

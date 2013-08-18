@@ -17,6 +17,7 @@ import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
 import com.finance.model.Payee;
 import com.honey.R;
+import com.honey.activity.ViewPayeeListActivity;
 import com.honey.common.Util;
 
 import org.json.JSONArray;
@@ -28,7 +29,7 @@ import java.util.List;
  * Created by jitse on 8/15/13.
  */
 public class PayeeListFragment extends Fragment {
-    private ArrayList<Payee> payees = new ArrayList<Payee>();
+    private ArrayList<Payee> payees;
     private List<String> payeeStringList = new ArrayList<String>();
     private ListView mPayeeView;
     private ArrayAdapter<String> adapter;
@@ -42,7 +43,6 @@ public class PayeeListFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_payee_list, container, false);
-
         animationTime = getResources().getInteger(android.R.integer.config_shortAnimTime);
         mPayeeView = (ListView) view.findViewById(R.id.lvPayee);
 
@@ -52,11 +52,10 @@ public class PayeeListFragment extends Fragment {
         //userId = ((MyApp)this.getApplication()).getUserId();
         userId = "1";
 
-        if (savedInstanceState != null) {
-            payees = (ArrayList<Payee>)savedInstanceState.getSerializable("list");
-        }
+        //if the parent activity already have some payees, then no need to bother getting new ones
+        payees = ((ViewPayeeListActivity)getActivity()).getPayees();
 
-        if (payees == null || payees.isEmpty()) {
+        if (payees == null) {
             fetchPayees();
         } else {
             fillList();
@@ -71,12 +70,6 @@ public class PayeeListFragment extends Fragment {
 
         });
         return view;
-    }
-
-    @Override
-    public void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState(outState);
-        outState.putSerializable("list", payees);
     }
 
     private void fetchPayees() {
@@ -140,14 +133,6 @@ public class PayeeListFragment extends Fragment {
     public void onDetach() {
         super.onDetach();
         listener = null;
-    }
-
-    public ArrayList<Payee> getPayees() {
-        return payees;
-    }
-
-    public void setPayees(ArrayList<Payee> payees) {
-        this.payees = payees;
     }
 }
 

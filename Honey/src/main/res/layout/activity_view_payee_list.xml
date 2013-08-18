@@ -4,14 +4,17 @@
               android:layout_width="fill_parent"
               android:layout_height="fill_parent"
               android:orientation="horizontal">
-    <FrameLayout
-            android:id="@+id/conPayeeList"
-            android:layout_weight="1"
-            android:layout_width="0dp"
-            android:layout_height="match_parent" />
-    <FrameLayout
-            android:id="@+id/conPayeeDetail"
-            android:layout_weight="1"
-            android:layout_width="0dp"
-            android:layout_height="match_parent" />
+
+    <fragment android:name="com.honey.Fragment.PayeeListFragment"
+              android:id="@+id/frgPayeeList"
+              android:layout_weight="1"
+              android:layout_width="0dp"
+              android:layout_height="match_parent" />
+
+    <fragment android:name="com.honey.Fragment.PayeeDetailFragment"
+              android:id="@+id/frgPayeeDetail"
+              android:layout_weight="2"
+              android:layout_width="0dp"
+              android:layout_height="match_parent" />
+
 </LinearLayout>
