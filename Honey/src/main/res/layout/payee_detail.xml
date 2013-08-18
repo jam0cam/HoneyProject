@@ -1,0 +1,59 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:id="@+id/payee_main_layout"
+              style="@style/LoginFormContainer"
+              android:layout_width="fill_parent"
+              android:layout_height="fill_parent"
+              android:orientation="vertical">
+    <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/txtName"
+            android:inputType="none"
+            android:editable="false"
+            android:text="hello"
+            android:textSize="30sp"
+            android:height="60sp"/>
+
+    <TableLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_gravity="center">
+        <TableRow
+                android:id="@+id/tableRow1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="5dip" >
+
+            <TextView
+                    android:layout_column="1"
+                    android:text="Account #:"/>
+
+            <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/txtAccount"
+                    android:text="Hello"
+                    android:inputType="none"
+                    android:layout_column="2"
+                    android:editable="false"/>
+        </TableRow>
+        <TableRow
+                android:id="@+id/tableRow1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="5dip" >
+            <TextView
+                    android:layout_column="1"
+                    android:text="Phone #:" />
+            <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/txtPhone"
+                    android:layout_column="2"
+                    android:text="Hello"
+                    android:inputType="none"
+                    android:editable="false"/>
+        </TableRow>
+
+    </TableLayout>
+</LinearLayout>

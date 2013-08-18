@@ -24,13 +24,17 @@
             android:windowSoftInputMode="adjustResize|stateVisible" >
         </activity>
         <activity
-            android:name="com.honey.activity.ViewPayeeListActivity"
+            android:name="com.honey.activity.PayeeListActivity"
             android:label="@string/title_activity_view_payee_list" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity
+            android:name=".activity.PayeeDetailActivity"
+            android:label="@string/title_activity_payee_detail" >
         </activity>
     </application>
 

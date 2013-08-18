@@ -167,7 +167,7 @@ public class LoginActivity extends Activity {
     }
 
     private void goToPayee() {
-        Intent intent = new Intent(this, ViewPayeeListActivity.class);
+        Intent intent = new Intent(this, PayeeListActivity.class);
         startActivity(intent);
     }
 }

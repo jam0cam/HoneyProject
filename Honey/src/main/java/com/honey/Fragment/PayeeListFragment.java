@@ -17,7 +17,7 @@ import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
 import com.finance.model.Payee;
 import com.honey.R;
-import com.honey.activity.ViewPayeeListActivity;
+import com.honey.activity.PayeeListActivity;
 import com.honey.common.Util;
 
 import org.json.JSONArray;
@@ -34,26 +34,19 @@ public class PayeeListFragment extends Fragment {
     private ListView mPayeeView;
     private ArrayAdapter<String> adapter;
     private String userId = "";
-    private int animationTime;
-    private View mProgressView;
-    private View mMainView;
 
     private OnItemSelectedListener listener;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_payee_list, container, false);
-        animationTime = getResources().getInteger(android.R.integer.config_shortAnimTime);
+        View view = inflater.inflate(R.layout.payee_list, container, false);
         mPayeeView = (ListView) view.findViewById(R.id.lvPayee);
-
-        mMainView = view.findViewById(R.id.payee_main_layout);
-        mProgressView = view.findViewById(R.id.payee_progress_layout);
 
         //userId = ((MyApp)this.getApplication()).getUserId();
         userId = "1";
 
         //if the parent activity already have some payees, then no need to bother getting new ones
-        payees = ((ViewPayeeListActivity)getActivity()).getPayees();
+        payees = ((PayeeListActivity)getActivity()).getPayees();
 
         if (payees == null) {
             fetchPayees();
@@ -73,8 +66,7 @@ public class PayeeListFragment extends Fragment {
     }
 
     private void fetchPayees() {
-
-        Util.showProgress(true, mProgressView, mMainView, animationTime);
+        //Util.showProgress(true, mProgressView, mMainView, animationTime);
         RequestQueue queue = Volley.newRequestQueue(getActivity().getApplicationContext());
         String url = getResources().getString(R.string.url_get_payee) + userId;
 
@@ -82,7 +74,7 @@ public class PayeeListFragment extends Fragment {
             @Override
             public void onResponse(JSONArray response) {
                 //if it comes back here, that means this is a valid user
-                Util.showProgress(false, mProgressView, mMainView, animationTime);
+                //Util.showProgress(false, mProgressView, mMainView, animationTime);
                 Payee[] payeesArray = Util.fromJSON(response, Payee[].class);
 
                 payees = new ArrayList<Payee>();
@@ -95,7 +87,7 @@ public class PayeeListFragment extends Fragment {
 
             @Override
             public void onErrorResponse(VolleyError error) {
-                Util.showProgress(false, mProgressView, mMainView, animationTime);
+                //Util.showProgress(false, mProgressView, mMainView, animationTime);
             }
         });
 
