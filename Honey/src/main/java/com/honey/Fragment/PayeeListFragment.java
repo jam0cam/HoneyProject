@@ -42,7 +42,7 @@ public class PayeeListFragment extends Fragment {
         View view = inflater.inflate(R.layout.payee_list, container, false);
         mPayeeView = (ListView) view.findViewById(R.id.lvPayee);
 
-        //userId = ((MyApp)this.getApplication()).getUserId();
+        //userId = ((MyApp)this.getActivity().getApplication()).getUserId();
         userId = "1";
 
         //if the parent activity already have some payees, then no need to bother getting new ones
@@ -66,7 +66,6 @@ public class PayeeListFragment extends Fragment {
     }
 
     private void fetchPayees() {
-        //Util.showProgress(true, mProgressView, mMainView, animationTime);
         RequestQueue queue = Volley.newRequestQueue(getActivity().getApplicationContext());
         String url = getResources().getString(R.string.url_get_payee) + userId;
 
@@ -74,7 +73,6 @@ public class PayeeListFragment extends Fragment {
             @Override
             public void onResponse(JSONArray response) {
                 //if it comes back here, that means this is a valid user
-                //Util.showProgress(false, mProgressView, mMainView, animationTime);
                 Payee[] payeesArray = Util.fromJSON(response, Payee[].class);
 
                 payees = new ArrayList<Payee>();
@@ -87,7 +85,6 @@ public class PayeeListFragment extends Fragment {
 
             @Override
             public void onErrorResponse(VolleyError error) {
-                //Util.showProgress(false, mProgressView, mMainView, animationTime);
             }
         });
 

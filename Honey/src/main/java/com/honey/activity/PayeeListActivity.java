@@ -1,9 +1,9 @@
 package com.honey.activity;
 
-import android.app.Activity;
 import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
 import android.view.View;
 
 import com.finance.model.Payee;
@@ -14,7 +14,7 @@ import com.honey.common.Util;
 
 import java.util.ArrayList;
 
-public class PayeeListActivity extends Activity implements PayeeListFragment.OnItemSelectedListener, ISelectedPayee{
+public class PayeeListActivity extends BaseActivity implements PayeeListFragment.OnItemSelectedListener, ISelectedPayee{
 
     private ArrayList<Payee> payees = null;
     private Payee selectedPayee = null;
@@ -50,6 +50,14 @@ public class PayeeListActivity extends Activity implements PayeeListFragment.OnI
             }
         }
     }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        super.onCreateOptionsMenu(menu);
+        getMenuInflater().inflate(R.menu.view_payee_list, menu);
+        return true;
+    }
+
 
     @Override
     public void onSaveInstanceState(Bundle outState) {
