@@ -1,18 +1,19 @@
 package com.honey.activity.history;
 
+import android.app.Activity;
 import android.app.Fragment;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
-import android.widget.TableLayout;
+import android.widget.AdapterView;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import com.finance.model.EntryCommand;
 import com.honey.R;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 /**
@@ -22,52 +23,58 @@ public class HistoryItemFragment extends Fragment {
 
     private ArrayList<EntryCommand> entries;
     private TextView txtTitle;
-    private LinearLayout mainLayout;
-    private SimpleDateFormat formatter = new SimpleDateFormat("MM/dd/yyyy");
+    private ListView listView;
+
+    private EventListener listener;
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.history_item, container, false);
 
         txtTitle = (TextView)view.findViewById(R.id.txtTitle);
-        mainLayout = (LinearLayout)view.findViewById(R.id.mainLayout);
+        listView = (ListView)view.findViewById(R.id.lst_history_item);
 
         if (entries != null && !entries.isEmpty()) {
-            refresh();
+            txtTitle.setText(entries.get(0).getPayee().getName());
+            listView.setAdapter(new HistoryListAdapter(this.getActivity(), entries));
+
+            listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                    Intent intent = new Intent(getActivity(), EditEntryActivity.class);
+                    intent.putExtra("entry", entries.get(i));
+                    startActivityForResult(intent, 1);
+                }
+            });
         }
         return view;
     }
 
-    public void setEntries(ArrayList<EntryCommand> entries) {
-        this.entries = entries;
+    public interface EventListener {
+        public void dataChanged();
     }
 
-    /**
-     * This is where most of the heavy lifting takes place. It will construct the entire layout.
-     */
-    private void refresh() {
-        txtTitle.setText(entries.get(0).getPayee().getName());
-
-        //for each entry, create a new horizontal LinearLayout. Put 2 TextViews in that layout, and then
-        //add that layout to mainLayout
-        mainLayout.removeAllViewsInLayout();
-        for (EntryCommand entry : entries) {
-            LinearLayout layout = new LinearLayout(this.getActivity());
-            layout.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
-            layout.setOrientation(LinearLayout.HORIZONTAL);
-
-            TextView tv1 = new TextView(this.getActivity());
-            tv1.setText(formatter.format(entry.getDate()));
-            tv1.setLayoutParams(new TableLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT, 1f));
-
-            TextView tv2 = new TextView(this.getActivity());
-            tv2.setText("$" + entry.getAmount());
-            tv2.setLayoutParams(new TableLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT, 1f));
-
-            layout.addView(tv1);
-            layout.addView(tv2);
-
-            mainLayout.addView(layout);
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+        if (activity instanceof EventListener) {
+            listener = (EventListener) activity;
+        } else {
+            throw new ClassCastException(activity.toString()
+                    + " must implemenet HistoryItemFragment.EventListener");
         }
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == getActivity().RESULT_OK){
+            listener.dataChanged();
+        }
+    }
+
+    public void setEntries(ArrayList<EntryCommand> entries) {
+        this.entries = entries;
     }
 }

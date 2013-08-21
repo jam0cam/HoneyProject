@@ -1,6 +1,7 @@
 package com.honey.activity;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -34,12 +35,11 @@ public class LoginActivity extends Activity {
     private String mEmail = "";
     private String mPassword = "";
 
+    private ProgressDialog pd;
+
     // UI references.
     private EditText mEmailView;
     private EditText mPasswordView;
-    private View mLoginFormView;
-    private View mLoginStatusView;
-    private TextView mLoginStatusMessageView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,10 +62,6 @@ public class LoginActivity extends Activity {
                 return false;
             }
         });
-
-        mLoginFormView = findViewById(R.id.login_form);
-        mLoginStatusView = findViewById(R.id.login_status);
-        mLoginStatusMessageView = (TextView) findViewById(R.id.login_status_message);
 
         findViewById(R.id.sign_in_button).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -121,10 +117,7 @@ public class LoginActivity extends Activity {
             // form field with an error.
             focusView.requestFocus();
         } else {
-            // Show a progress spinner, and kick off a background task to
-            // perform the user login attempt.
-            mLoginStatusMessageView.setText(R.string.login_progress_signing_in);
-            Util.showProgress(true, mLoginStatusView, mLoginFormView, getResources().getInteger(android.R.integer.config_shortAnimTime));
+            pd = ProgressDialog.show(this,"Please Wait...","Logging In");
 
             RequestQueue queue = Volley.newRequestQueue(this);
             String url = getResources().getString(R.string.url_login);
@@ -139,7 +132,7 @@ public class LoginActivity extends Activity {
                 @Override
                 public void onResponse(JSONObject response) {
                     //if it comes back here, that means this is a valid user
-                    Util.showProgress(false, mLoginStatusView, mLoginFormView, getResources().getInteger(android.R.integer.config_shortAnimTime));
+                    if (pd.isShowing()){pd.dismiss();}
                     User user = Util.fromJSON(response, User.class);
                     succeedLogin(user);
                 }
@@ -147,7 +140,7 @@ public class LoginActivity extends Activity {
 
                 @Override
                 public void onErrorResponse(VolleyError error) {
-                    Util.showProgress(false, mLoginStatusView, mLoginFormView, getResources().getInteger(android.R.integer.config_shortAnimTime));
+                    if (pd.isShowing()){pd.dismiss();}
                     mPasswordView.setError(getString(R.string.error_incorrect_password));
                     mPasswordView.requestFocus();
 

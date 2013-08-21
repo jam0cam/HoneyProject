@@ -15,7 +15,7 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
-            android:name=".activity.payee.AddPayeeActivity"
+            android:name="com.honey.activity.payee.AddPayeeActivity"
             android:label="@string/app_name" >
         </activity>
         <activity
@@ -24,15 +24,15 @@
             android:windowSoftInputMode="adjustResize|stateVisible" >
         </activity>
         <activity
-            android:name=".activity.payee.PayeeListActivity"
+            android:name="com.honey.activity.payee.PayeeListActivity"
             android:label="@string/title_activity_view_payee_list" >
         </activity>
         <activity
-            android:name=".activity.payee.PayeeDetailActivity"
+            android:name="com.honey.activity.payee.PayeeDetailActivity"
             android:label="@string/title_activity_payee_detail" >
         </activity>
         <activity
-            android:name=".activity.history.HistoryActivity"
+            android:name="com.honey.activity.history.HistoryActivity"
             android:label="@string/title_activity_history" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -40,8 +40,13 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".activity.history.EditEntryActivity"
+            android:label="@string/title_activity_edit_entry" >
+        </activity>
     </application>
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.GET_TASKS" />
+
 </manifest>

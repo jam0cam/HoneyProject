@@ -1,15 +1,14 @@
 package com.honey.activity.payee;
 
 import android.app.FragmentTransaction;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
-import android.view.View;
 
 import com.finance.model.Payee;
 import com.honey.R;
 import com.honey.activity.BaseActivity;
-import com.honey.common.Util;
 
 import java.util.ArrayList;
 
@@ -18,9 +17,7 @@ public class PayeeListActivity extends BaseActivity implements PayeeListFragment
     private ArrayList<Payee> payees = null;
     private Payee selectedPayee = null;
 
-    private int animationTime;
-    private View mProgressView;
-    private View mMainView;
+    private ProgressDialog pd;
 
 
     @Override
@@ -33,13 +30,9 @@ public class PayeeListActivity extends BaseActivity implements PayeeListFragment
         }
 
         setContentView(R.layout.activity_payee_list);
-        animationTime = getResources().getInteger(android.R.integer.config_shortAnimTime);
-
-        mMainView = findViewById(R.id.layoutMain);
-        mProgressView = findViewById(R.id.layoutProgress);
 
         if (payees == null) {
-            Util.showProgress(true, mProgressView, mMainView, animationTime);
+            pd = ProgressDialog.show(this,"Fetching Payees","Loading");
         }
 
         if (findViewById(R.id.fragment_container) != null && selectedPayee != null) {
@@ -71,9 +64,8 @@ public class PayeeListActivity extends BaseActivity implements PayeeListFragment
         if (this.selectedPayee == null) {
             this.selectedPayee = payees.get(0);
         }
-        if (mProgressView != null) {
-            Util.showProgress(false, mProgressView, mMainView, animationTime);
-        }
+
+        if (pd.isShowing()){pd.dismiss();}
 
         //this should only happen once. On the first time it fills out the payee, the detail
         //fragment may not exist in landscape mode. Add it

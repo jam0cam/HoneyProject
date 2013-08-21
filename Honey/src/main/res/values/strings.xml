@@ -9,8 +9,10 @@
     <string name="url_login">http://honey.elasticbeanstalk.com/service/login</string>
     <string name="url_get_payee">http://honey.elasticbeanstalk.com/finance/service/payee/getAllPayees/userId/</string>
     <string name="url_get_entries">http://honey.elasticbeanstalk.com/finance/service/entry/getEntriesByUserId/</string>
+    <string name="url_save_entry">http://10.240.3.134:9000/finance/service/entry/save</string>
     <string name="title_activity_view_payee">View Payees</string>
     <string name="title_activity_payee_detail">Payee</string>
     <string name="title_activity_history">Payment History</string>
+    <string name="title_activity_edit_entry">Edit Entry</string>
 
 </resources>

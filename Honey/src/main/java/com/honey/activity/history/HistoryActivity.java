@@ -1,9 +1,10 @@
 package com.honey.activity.history;
 
 import android.app.FragmentTransaction;
+import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
-import android.view.View;
 
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -19,34 +20,28 @@ import org.json.JSONArray;
 
 import java.util.ArrayList;
 
-public class HistoryActivity extends BaseActivity {
+public class HistoryActivity extends BaseActivity implements HistoryItemFragment.EventListener{
 
     private String userId = "1";
     private ArrayList<EntryCommand> entries;
     private ArrayList<String> uniquePayees;
 
-    private int animationTime;
-    private View mProgressView;
-    private View mMainView;
+    private ProgressDialog pd;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_history);
 
+        //if it is specified that history should reload, then this should reload because data could've changed.
         if (savedInstanceState != null) {
             entries = (ArrayList<EntryCommand>)savedInstanceState.getSerializable("entries");
             uniquePayees = (ArrayList<String>)savedInstanceState.getSerializable("uniquePayees");
         }
 
-
-        animationTime = getResources().getInteger(android.R.integer.config_shortAnimTime);
-        mMainView = findViewById(R.id.lvEntries);
-        mProgressView = findViewById(R.id.layoutProgress);
-
-
         if (entries == null) {
-            Util.showProgress(true, mProgressView, mMainView, animationTime);
+            pd = ProgressDialog.show(this,"Fetching history","Loading...");
             fetchEntries();
         }
     }
@@ -57,12 +52,6 @@ public class HistoryActivity extends BaseActivity {
         outState.putSerializable("uniquePayees", uniquePayees);
 
         super.onSaveInstanceState(outState);
-    }
-
-    @Override
-    protected void onDestroy() {
-
-        super.onDestroy();
     }
 
     private void fetchEntries() {
@@ -104,13 +93,20 @@ public class HistoryActivity extends BaseActivity {
         queue.add(request);
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == 1) {
+            if(resultCode == RESULT_OK){
+                fetchEntries();
+            }
+        }
+    }
+
     private void initiateFragments() {
         if (uniquePayees == null || uniquePayees.isEmpty())
             return;
 
-        if (mProgressView != null) {
-            Util.showProgress(false, mProgressView, mMainView, animationTime);
-        }
+        if (pd.isShowing()) {pd.dismiss();}
 
         ArrayList<EntryCommand> entryGroup = new ArrayList<EntryCommand>();
         String currentPayee = entries.get(0).getPayee().getName();
@@ -144,4 +140,11 @@ public class HistoryActivity extends BaseActivity {
         return true;
     }
 
+    @Override
+    public void dataChanged() {
+        //restart the current activity
+        Intent intent = getIntent();
+        finish();
+        startActivity(intent);
+    }
 }
