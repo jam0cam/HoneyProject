@@ -12,7 +12,7 @@
             xmlns:android="http://schemas.android.com/apk/res/android"
             xmlns:tools="http://schemas.android.com/tools"
             android:id="@+id/frgPayeeDetail"
-            android:name="com.honey.Fragment.PayeeDetailFragment"
+            android:name="com.honey.activity.payee.PayeeDetailFragment"
             android:layout_width="fill_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"

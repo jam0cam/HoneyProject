@@ -1,4 +1,4 @@
-package com.honey.activity;
+package com.honey.activity.payee;
 
 import com.finance.model.Payee;
 

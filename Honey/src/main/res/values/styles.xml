@@ -24,4 +24,9 @@
         <item name="android:padding">18sp</item>
     </style>
 
+    <style name="headingFontSize">
+        <item name="android:textSize">30sp</item>
+        <item name="android:height">60sp</item>
+    </style>
+
 </resources>

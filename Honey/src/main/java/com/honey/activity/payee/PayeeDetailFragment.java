@@ -1,4 +1,4 @@
-package com.honey.Fragment;
+package com.honey.activity.payee;
 
 import android.app.Fragment;
 import android.os.Bundle;
@@ -9,7 +9,6 @@ import android.widget.TextView;
 
 import com.finance.model.Payee;
 import com.honey.R;
-import com.honey.activity.ISelectedPayee;
 
 /**
  * Created by jitse on 8/16/13.

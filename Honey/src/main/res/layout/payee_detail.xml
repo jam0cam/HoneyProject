@@ -5,14 +5,14 @@
               android:layout_height="fill_parent"
               android:orientation="vertical">
     <TextView
+            style="@style/headingFontSize"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:id="@+id/txtName"
             android:inputType="none"
             android:editable="false"
             android:text="hello"
-            android:textSize="30sp"
-            android:height="60sp"/>
+            />
 
     <TableLayout
             android:layout_width="fill_parent"

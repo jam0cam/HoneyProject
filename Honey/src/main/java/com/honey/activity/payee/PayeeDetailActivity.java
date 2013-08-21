@@ -1,9 +1,10 @@
-package com.honey.activity;
+package com.honey.activity.payee;
 
 import android.os.Bundle;
 
 import com.finance.model.Payee;
 import com.honey.R;
+import com.honey.activity.BaseActivity;
 
 public class PayeeDetailActivity extends BaseActivity implements ISelectedPayee{
 

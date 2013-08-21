@@ -1,4 +1,4 @@
-package com.honey.Fragment;
+package com.honey.activity.payee;
 
 import android.app.Activity;
 import android.app.Fragment;
@@ -17,7 +17,6 @@ import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
 import com.finance.model.Payee;
 import com.honey.R;
-import com.honey.activity.PayeeListActivity;
 import com.honey.common.Util;
 
 import org.json.JSONArray;

@@ -1,4 +1,4 @@
-package com.honey.activity;
+package com.honey.activity.payee;
 
 import android.app.FragmentTransaction;
 import android.content.Intent;
@@ -7,9 +7,8 @@ import android.view.Menu;
 import android.view.View;
 
 import com.finance.model.Payee;
-import com.honey.Fragment.PayeeDetailFragment;
-import com.honey.Fragment.PayeeListFragment;
 import com.honey.R;
+import com.honey.activity.BaseActivity;
 import com.honey.common.Util;
 
 import java.util.ArrayList;
