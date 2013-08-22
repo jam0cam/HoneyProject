@@ -27,14 +27,14 @@ import java.util.Date;
 
 public class EditEntryActivity extends BaseActivity {
 
-    private EntryCommand entry;
+    protected EntryCommand entry;
 
-    private EditText txtAmount;
-    private EditText txtDate;
-    private EditText txtNotes;
-    private TextView txtPayee;
-    private Button btnSave;
-    private SimpleDateFormat formatter = new SimpleDateFormat("MM/dd/yyyy");
+    protected EditText txtAmount;
+    protected EditText txtDate;
+    protected EditText txtNotes;
+    protected TextView txtPayee;
+    protected Button btnSave;
+    protected SimpleDateFormat formatter = new SimpleDateFormat("MM/dd/yyyy");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,47 +46,47 @@ public class EditEntryActivity extends BaseActivity {
         } else {
             entry = (EntryCommand)getIntent().getSerializableExtra("entry");
         }
-
+        getActionBar().setDisplayHomeAsUpEnabled(true);
         txtPayee = (TextView)findViewById(R.id.txtPayee);
         txtAmount = (EditText)findViewById(R.id.txtAmount);
         txtDate = (EditText)findViewById(R.id.txtDate);
         txtNotes = (EditText)findViewById(R.id.txtNotes);
         btnSave = (Button)findViewById(R.id.btnSave);
 
-        txtPayee.setText(entry.getPayee().getName());
-        txtNotes.setText(entry.getNotes());
-        txtDate.setText(formatter.format(entry.getDate()));
-        txtAmount.setText(entry.getAmount());
+        //when entry == null, this is potentially a call from AddEditActivity
+        if (entry != null) {
+            txtPayee.setText(entry.getPayee().getName());
+            txtNotes.setText(entry.getNotes());
+            txtDate.setText(formatter.format(entry.getDate()));
+            txtAmount.setText(entry.getAmount());
 
-        getActionBar().setDisplayHomeAsUpEnabled(true);
+            btnSave.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
 
-        btnSave.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+                    EntryCommand newEntry = new EntryCommand();
+                    newEntry.setPayee(entry.getPayee());
+                    newEntry.setId(entry.getId());
 
-                EntryCommand newEntry = new EntryCommand();
-                newEntry.setPayee(entry.getPayee());
-                newEntry.setId(entry.getId());
-
-                //these are the editable data
-                newEntry.setNotes(txtNotes.getText().toString());
-                newEntry.setDate(new Date(txtDate.getText().toString()));
-                newEntry.setAmount(txtAmount.getText().toString());
-                saveData(newEntry);
-            }
-        });
+                    //these are the editable data
+                    newEntry.setNotes(txtNotes.getText().toString());
+                    newEntry.setDate(new Date(txtDate.getText().toString()));
+                    newEntry.setAmount(txtAmount.getText().toString());
+                    saveData(newEntry);
+                }
+            });
+        }
     }
 
 
     @Override
     public void onSaveInstanceState(Bundle outState) {
         outState.putSerializable("entry", entry);
-
         super.onSaveInstanceState(outState);
     }
 
 
-    private void saveData(EntryCommand entry) {
+    protected void saveData(EntryCommand entry) {
         RequestQueue queue = Volley.newRequestQueue(getApplicationContext());
         String url = getResources().getString(R.string.url_save_entry);
         JSONObject obj = Util.toJsonObject(entry);

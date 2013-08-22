@@ -22,6 +22,11 @@
             android:name="com.honey.activity.LoginActivity"
             android:label="@string/title_activity_login"
             android:windowSoftInputMode="adjustResize|stateVisible" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
         <activity
             android:name="com.honey.activity.payee.PayeeListActivity"
@@ -34,15 +39,14 @@
         <activity
             android:name="com.honey.activity.history.HistoryActivity"
             android:label="@string/title_activity_history" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity
             android:name=".activity.history.EditEntryActivity"
             android:label="@string/title_activity_edit_entry" >
+        </activity>
+        <activity
+                android:name=".activity.history.AddEntryActivity"
+                android:label="@string/title_activity_add_entry" >
         </activity>
     </application>
 

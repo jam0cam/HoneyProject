@@ -10,6 +10,8 @@
     <string name="prompt_notes">Notes</string>
     <string name="prompt_password">Password</string>
     <string name="prompt_save">Save</string>
+    <string name="prompt_amount">Amount (xx.xx)</string>
+    <string name="prompt_date">Date (mm/dd/yyyy)</string>
 
     <string name="action_sign_in_register"><b>Sign in</b> or register</string>
     <string name="action_sign_in_short">Sign in</string>

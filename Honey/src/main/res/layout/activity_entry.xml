@@ -18,6 +18,13 @@
                 android:layout_height="wrap_content"
                 />
 
+        <Spinner
+                android:id="@+id/spinnerPayee"
+                android:visibility="gone"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content" />
+
+
         <EditText
                 android:id="@+id/txtAmount"
                 android:singleLine="true"
@@ -26,7 +33,7 @@
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:minHeight="?android:attr/listPreferredItemHeight"
-                android:hint="@string/prompt_accountNumber"
+                android:hint="@string/prompt_amount"
                 android:inputType="numberDecimal"/>
 
         <EditText
@@ -37,7 +44,7 @@
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:minHeight="?android:attr/listPreferredItemHeight"
-                android:hint="@string/prompt_phone"
+                android:hint="@string/prompt_date"
                 android:inputType="date" />
 
         <EditText

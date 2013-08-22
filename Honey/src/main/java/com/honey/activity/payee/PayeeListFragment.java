@@ -17,6 +17,7 @@ import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
 import com.finance.model.Payee;
 import com.honey.R;
+import com.honey.common.MyApp;
 import com.honey.common.Util;
 
 import org.json.JSONArray;
@@ -41,8 +42,7 @@ public class PayeeListFragment extends Fragment {
         View view = inflater.inflate(R.layout.payee_list, container, false);
         mPayeeView = (ListView) view.findViewById(R.id.lvPayee);
 
-        //userId = ((MyApp)this.getActivity().getApplication()).getUserId();
-        userId = "1";
+        userId = ((MyApp)this.getActivity().getApplication()).getUserId();
 
         //if the parent activity already have some payees, then no need to bother getting new ones
         payees = ((PayeeListActivity)getActivity()).getPayees();

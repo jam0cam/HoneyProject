@@ -13,6 +13,7 @@ import android.widget.TextView;
 
 import com.finance.model.EntryCommand;
 import com.honey.R;
+import com.honey.common.Util;
 
 import java.util.ArrayList;
 
@@ -38,7 +39,7 @@ public class HistoryItemFragment extends Fragment {
         if (entries != null && !entries.isEmpty()) {
             txtTitle.setText(entries.get(0).getPayee().getName());
             listView.setAdapter(new HistoryListAdapter(this.getActivity(), entries));
-
+            Util.getListViewSize(listView);
             listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {

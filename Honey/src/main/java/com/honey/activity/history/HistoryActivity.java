@@ -5,6 +5,7 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
+import android.view.MenuItem;
 
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -12,8 +13,10 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
 import com.finance.model.EntryCommand;
+import com.finance.model.Payee;
 import com.honey.R;
 import com.honey.activity.BaseActivity;
+import com.honey.common.MyApp;
 import com.honey.common.Util;
 
 import org.json.JSONArray;
@@ -22,8 +25,9 @@ import java.util.ArrayList;
 
 public class HistoryActivity extends BaseActivity implements HistoryItemFragment.EventListener{
 
-    private String userId = "1";
+    private String userId;
     private ArrayList<EntryCommand> entries;
+    private ArrayList<Payee> allPayees;
     private ArrayList<String> uniquePayees;
 
     private ProgressDialog pd;
@@ -34,15 +38,19 @@ public class HistoryActivity extends BaseActivity implements HistoryItemFragment
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_history);
 
+        userId = ((MyApp)getApplication()).getUserId();
+
         //if it is specified that history should reload, then this should reload because data could've changed.
         if (savedInstanceState != null) {
             entries = (ArrayList<EntryCommand>)savedInstanceState.getSerializable("entries");
             uniquePayees = (ArrayList<String>)savedInstanceState.getSerializable("uniquePayees");
+            allPayees = (ArrayList<Payee>)savedInstanceState.getSerializable("allPayees");
         }
 
         if (entries == null) {
             pd = ProgressDialog.show(this,"Fetching history","Loading...");
             fetchEntries();
+            fetchPayees();
         }
     }
 
@@ -50,7 +58,7 @@ public class HistoryActivity extends BaseActivity implements HistoryItemFragment
     public void onSaveInstanceState(Bundle outState) {
         outState.putSerializable("entries", entries);
         outState.putSerializable("uniquePayees", uniquePayees);
-
+        outState.putSerializable("allPayees", allPayees);
         super.onSaveInstanceState(outState);
     }
 
@@ -92,12 +100,36 @@ public class HistoryActivity extends BaseActivity implements HistoryItemFragment
 
         queue.add(request);
     }
+    private void fetchPayees() {
+        RequestQueue queue = Volley.newRequestQueue(this);
+        String url = getResources().getString(R.string.url_get_payee) + userId;
+
+        JsonArrayRequest request = new JsonArrayRequest(url, new Response.Listener<JSONArray>() {
+            @Override
+            public void onResponse(JSONArray response) {
+                //if it comes back here, that means this is a valid user
+                Payee[] payeesArray = Util.fromJSON(response, Payee[].class);
+
+                allPayees = new ArrayList<Payee>();
+                for (Payee p : payeesArray) {
+                    allPayees.add(p);
+                }
+            }
+        }, new Response.ErrorListener() {
+
+            @Override
+            public void onErrorResponse(VolleyError error) {
+            }
+        });
+
+        queue.add(request);
+    }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == 1) {
             if(resultCode == RESULT_OK){
-                fetchEntries();
+                restartActivity();
             }
         }
     }
@@ -141,8 +173,28 @@ public class HistoryActivity extends BaseActivity implements HistoryItemFragment
     }
 
     @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.action_new_entry:
+                Intent addEntryIntent = new Intent(this, AddEntryActivity.class);
+                addEntryIntent.putExtra("payees", allPayees);
+                startActivityForResult(addEntryIntent, 1);
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+
+
+    /**
+     * This should be coming from the edit entry fragment
+     */
+    @Override
     public void dataChanged() {
-        //restart the current activity
+        restartActivity();
+    }
+
+    private void restartActivity(){
         Intent intent = getIntent();
         finish();
         startActivity(intent);
