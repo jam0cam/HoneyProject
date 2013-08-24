@@ -1,13 +1,11 @@
 package com.honey.activity.history;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -105,20 +103,6 @@ public class EditEntryActivity extends BaseActivity {
         });
 
         queue.add(request);
-    }
-
-    private void saveFailed() {
-        Toast toast = Toast.makeText(this, "Failed to save.", Toast.LENGTH_SHORT);
-        toast.show();
-    }
-
-    private void saveSuccessful() {
-        Toast toast = Toast.makeText(this, "Entry Saved.", Toast.LENGTH_SHORT);
-        toast.show();
-
-        Intent returnIntent = new Intent();
-        setResult(RESULT_OK,returnIntent);
-        finish();
     }
 
     @Override

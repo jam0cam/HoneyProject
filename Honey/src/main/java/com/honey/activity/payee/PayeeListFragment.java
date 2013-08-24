@@ -33,7 +33,7 @@ public class PayeeListFragment extends Fragment {
     private List<String> payeeStringList = new ArrayList<String>();
     private ListView mPayeeView;
     private ArrayAdapter<String> adapter;
-    private String userId = "";
+    private String userId;
 
     private OnItemSelectedListener listener;
 
@@ -64,7 +64,7 @@ public class PayeeListFragment extends Fragment {
         return view;
     }
 
-    private void fetchPayees() {
+    public void fetchPayees() {
         RequestQueue queue = Volley.newRequestQueue(getActivity().getApplicationContext());
         String url = getResources().getString(R.string.url_get_payee) + userId;
 

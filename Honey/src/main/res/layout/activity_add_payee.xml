@@ -1,4 +1,4 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -6,17 +6,8 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     android:paddingBottom="@dimen/activity_vertical_margin"
+    android:orientation="vertical"
     tools:context=".AddPayeeActivity">
-
-
-    <!-- Login form -->
-    <ScrollView
-            android:id="@+id/login_form"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-        <LinearLayout style="@style/LoginFormContainer"
-                      android:orientation="vertical">
 
             <EditText
                     android:id="@+id/name"
@@ -61,7 +52,38 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/prompt_notes"
-                    android:inputType="textMultiLine" />
+                    android:inputType="textMultiLine"
+                    android:maxLength="120"/>
+
+
+            <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    >
+                <Switch
+                        android:id="@+id/sw"
+                        android:layout_width="wrap_content"
+                        android:layout_height="fill_parent"
+                        android:paddingRight="30dp"
+                        />
+                <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="fill_parent"
+                        android:gravity="center_vertical"
+                        android:text="Notify on the"
+                        />
+                <NumberPicker android:id="@+id/np"
+                              android:layout_width="wrap_content"
+                              android:layout_height="130dp"
+                              android:width="65dp"/>
+                <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="fill_parent"
+                        android:gravity="center_vertical"
+                        android:text="day of each month."
+                        />
+            </LinearLayout>
 
             <Button android:id="@+id/btnSave"
                     android:layout_width="wrap_content"
@@ -71,10 +93,5 @@
                     android:paddingLeft="32dp"
                     android:paddingRight="32dp"
                     android:layout_gravity="right" />
-        </LinearLayout>
 
-    </ScrollView>
-
-
-
-</RelativeLayout>
+</LinearLayout>

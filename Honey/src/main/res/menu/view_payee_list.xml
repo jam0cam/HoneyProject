@@ -1,4 +1,9 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/action_add_payee"
+          android:title="Add Payee"
+          android:orderInCategory="100"
+          android:icon="@android:drawable/ic_menu_add"
+          android:showAsAction="always" />
     <item android:id="@+id/action_history"
           android:title="History"
           android:orderInCategory="100"

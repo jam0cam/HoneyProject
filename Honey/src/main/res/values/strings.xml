@@ -8,12 +8,17 @@
     <string name="url_local">http://10.0.2.2:9000/service/login</string>
     <string name="url_login">http://honey.elasticbeanstalk.com/service/login</string>
     <string name="url_get_payee">http://honey.elasticbeanstalk.com/finance/service/payee/getAllPayees/userId/</string>
+    <string name="url_save_payee">http://honey.elasticbeanstalk.com/finance/service/payee/save</string>
+    <string name="url_delete_payee">http://honey.elasticbeanstalk.com/finance/service/payee/delete</string>
     <string name="url_get_entries">http://honey.elasticbeanstalk.com/finance/service/entry/getEntriesByUserId/</string>
     <string name="url_save_entry">http://honey.elasticbeanstalk.com/finance/service/entry/save</string>
+    <string name="url_delete_entry">http://honey.elasticbeanstalk.com/finance/service/entry/delete</string>
     <string name="title_activity_view_payee">View Payees</string>
     <string name="title_activity_payee_detail">Payee</string>
     <string name="title_activity_history">Payment History</string>
     <string name="title_activity_edit_entry">Edit Entry</string>
     <string name="title_activity_add_entry">Add Entry</string>
+    <string name="title_activity_add_payee">Add Payee</string>
+    <string name="title_activity_edit_payee">Edit Payee</string>
 
 </resources>

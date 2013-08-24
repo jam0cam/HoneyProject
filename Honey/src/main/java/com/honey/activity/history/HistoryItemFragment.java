@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -38,18 +37,14 @@ public class HistoryItemFragment extends Fragment {
 
         if (entries != null && !entries.isEmpty()) {
             txtTitle.setText(entries.get(0).getPayee().getName());
-            listView.setAdapter(new HistoryListAdapter(this.getActivity(), entries));
-            Util.getListViewSize(listView);
-            listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                @Override
-                public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                    Intent intent = new Intent(getActivity(), EditEntryActivity.class);
-                    intent.putExtra("entry", entries.get(i));
-                    startActivityForResult(intent, 1);
-                }
-            });
+            listView.setAdapter(new HistoryListAdapter(this.getActivity(), entries, this));
+            resizeView();
         }
         return view;
+    }
+
+    public void resizeView() {
+        Util.getListViewSize(listView);
     }
 
     public interface EventListener {

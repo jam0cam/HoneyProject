@@ -1,10 +1,12 @@
 package com.honey.activity.payee;
 
+import android.app.Fragment;
 import android.app.FragmentTransaction;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
+import android.view.MenuItem;
 
 import com.finance.model.Payee;
 import com.honey.R;
@@ -65,7 +67,7 @@ public class PayeeListActivity extends BaseActivity implements PayeeListFragment
             this.selectedPayee = payees.get(0);
         }
 
-        if (pd.isShowing()){pd.dismiss();}
+        if (pd != null && pd.isShowing()){pd.dismiss();}
 
         //this should only happen once. On the first time it fills out the payee, the detail
         //fragment may not exist in landscape mode. Add it
@@ -86,7 +88,7 @@ public class PayeeListActivity extends BaseActivity implements PayeeListFragment
     }
 
     private void createDetailFragment() {
-        PayeeDetailFragment fragment = new PayeeDetailFragment();
+        PayeeDetailFragment fragment = new PayeeDetailFragment(this, payees);
         FragmentTransaction transaction = getFragmentManager().beginTransaction();
         transaction.replace(R.id.fragment_container, fragment, "detailFragment");
         transaction.commit();
@@ -103,5 +105,50 @@ public class PayeeListActivity extends BaseActivity implements PayeeListFragment
             intent.putExtra("payee", payee);
             startActivity(intent);
         }
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.action_add_payee:
+                Intent addPayeeIntent = new Intent(this, AddPayeeActivity.class);
+                addPayeeIntent.putExtra("payees", payees);
+                startActivityForResult(addPayeeIntent, 1);
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == 1) {
+            if(resultCode == RESULT_OK){
+                restartActivity();
+            }
+        }
+    }
+
+    /**
+     * This is used so that the activity doesn't *appear* to be reloaded
+     */
+    public void softRestartActivity() {
+        //remove the current fragment
+        FragmentTransaction transaction = getFragmentManager().beginTransaction();
+        Fragment frag = getFragmentManager().findFragmentByTag("detailFragment");
+        transaction.remove(frag);
+        transaction.commit();
+
+        payees = null;
+        selectedPayee = null;
+
+        //reload the list fragment
+        PayeeListFragment listFragment = (PayeeListFragment)getFragmentManager().findFragmentById(R.id.frgPayeeList);
+        listFragment.fetchPayees();
+    }
+
+    public void restartActivity(){
+        Intent intent = getIntent();
+        finish();
+        startActivity(intent);
     }
 }

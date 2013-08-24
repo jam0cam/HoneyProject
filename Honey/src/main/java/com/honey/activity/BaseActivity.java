@@ -3,6 +3,7 @@ package com.honey.activity;
 import android.app.Activity;
 import android.content.Intent;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.honey.R;
 import com.honey.activity.history.HistoryActivity;
@@ -31,5 +32,19 @@ public class BaseActivity extends Activity {
                 return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    protected void saveFailed() {
+        Toast toast = Toast.makeText(this, "Failed to save.", Toast.LENGTH_SHORT);
+        toast.show();
+    }
+
+    protected void saveSuccessful() {
+        Toast toast = Toast.makeText(this, "Saved.", Toast.LENGTH_SHORT);
+        toast.show();
+
+        Intent returnIntent = new Intent();
+        setResult(RESULT_OK,returnIntent);
+        finish();
     }
 }

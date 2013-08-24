@@ -4,33 +4,51 @@
               android:layout_width="fill_parent"
               android:layout_height="fill_parent"
               android:orientation="vertical">
-    <TextView
-            style="@style/headingFontSize"
+
+    <LinearLayout
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/txtName"
-            android:inputType="none"
-            android:editable="false"
-            android:text="hello"
-            />
+            android:orientation="horizontal"
+            >
+        <TextView
+                style="@style/headingFontSize"
+                android:layout_width="0dp"
+                android:layout_weight="3"
+                android:layout_height="match_parent"
+                android:id="@+id/txtName"
+                android:gravity="bottom"
+                android:text="hello"
+                />
+        <ImageView
+                android:id="@+id/imgAlarm"
+                android:src="@drawable/alarm_off_40"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="match_parent"
+                />
+    </LinearLayout>
+
 
     <TableLayout
             android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
+            android:layout_height="wrap_content"
             android:layout_gravity="center">
         <TableRow
                 android:id="@+id/tableRow1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:padding="5dip" >
+                >
             <TextView
                     android:layout_column="1"
+                    android:gravity="right"
                     android:text="Account #:"/>
             <TextView
-                    android:layout_width="fill_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:id="@+id/txtAccount"
                     android:text="Hello"
+                    android:padding="5dip"
+                    android:layout_weight="1"
                     android:inputType="none"
                     android:layout_column="2"
                     android:editable="false"/>
@@ -39,19 +57,95 @@
                 android:id="@+id/tableRow1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:padding="5dip" >
+                >
             <TextView
                     android:layout_column="1"
+                    android:gravity="right"
                     android:text="Phone #:" />
             <TextView
-                    android:layout_width="fill_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:id="@+id/txtPhone"
                     android:layout_column="2"
                     android:text="Hello"
+                    android:padding="5dip"
+                    android:layout_weight="1"
                     android:inputType="none"
                     android:editable="false"/>
         </TableRow>
-
+        <TableRow
+                android:id="@+id/tableRow1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                >
+            <TextView
+                    android:layout_column="1"
+                    android:gravity="right"
+                    android:text="URL:" />
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/txtUrl"
+                    android:layout_column="2"
+                    android:text="Hello"
+                    android:padding="5dip"
+                    android:layout_weight="1"
+                    android:inputType="none"
+                    android:editable="false"/>
+        </TableRow>
+        <TableRow
+                android:id="@+id/tableRow1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                >
+            <TextView
+                    android:layout_column="1"
+                    android:gravity="right"
+                    android:text="Notes:" />
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/txtNotes"
+                    android:layout_column="2"
+                    android:text="Hello"
+                    android:maxLines="6"
+                    android:layout_weight="1"
+                    android:padding="5dip"
+                    />
+        </TableRow>
     </TableLayout>
+    <TextView
+            android:id="@+id/txtNotifyDay"
+            android:visibility="gone"
+            android:paddingTop="30dp"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            />
+    <LinearLayout
+            android:layout_height="wrap_content"
+            android:layout_width="fill_parent"
+            android:paddingTop="15dp"
+            android:orientation="horizontal"
+            >
+
+        <ImageButton
+                android:id="@+id/btnEdit"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:clickable="true"
+                android:layout_height="wrap_content"
+                android:src="@android:drawable/ic_menu_edit"
+                />
+
+        <ImageButton
+                android:id="@+id/btnRemove"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:clickable="true"
+                android:layout_height="wrap_content"
+                android:src="@android:drawable/ic_menu_delete"
+                />
+
+    </LinearLayout>
+
 </LinearLayout>

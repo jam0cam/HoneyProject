@@ -6,7 +6,7 @@ import android.app.Application;
  * Created by jitse on 8/13/13.
  */
 public class MyApp extends Application {
-    private String userId;
+    private String userId = "1";
 
     public String getUserId() {
         return userId;

@@ -38,6 +38,8 @@ public class HistoryActivity extends BaseActivity implements HistoryItemFragment
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_history);
 
+
+
         userId = ((MyApp)getApplication()).getUserId();
 
         //if it is specified that history should reload, then this should reload because data could've changed.
@@ -138,7 +140,7 @@ public class HistoryActivity extends BaseActivity implements HistoryItemFragment
         if (uniquePayees == null || uniquePayees.isEmpty())
             return;
 
-        if (pd.isShowing()) {pd.dismiss();}
+        if (pd != null && pd.isShowing()) {pd.dismiss();}
 
         ArrayList<EntryCommand> entryGroup = new ArrayList<EntryCommand>();
         String currentPayee = entries.get(0).getPayee().getName();
