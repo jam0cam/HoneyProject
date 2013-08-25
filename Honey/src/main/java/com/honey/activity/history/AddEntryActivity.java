@@ -56,16 +56,25 @@ public class AddEntryActivity  extends EditEntryActivity {
         btnSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-                EntryCommand newEntry = new EntryCommand();
-                newEntry.setSelectedPayeeId(entry.getSelectedPayeeId());
-
-                //these are the editable data
-                newEntry.setNotes(txtNotes.getText().toString());
-                newEntry.setDate(new Date(txtDate.getText().toString()));
-                newEntry.setAmount(txtAmount.getText().toString());
-                saveData(newEntry);
+               attemptSave();
             }
         });
     }
+
+    protected void attemptSave() {
+        boolean hasErrors = hasErrors();
+
+        if (!hasErrors) {
+            EntryCommand newEntry = new EntryCommand();
+            newEntry.setSelectedPayeeId(entry.getSelectedPayeeId());
+
+            //these are the editable data
+            newEntry.setNotes(notes);
+            newEntry.setDate(date);
+            newEntry.setAmount(amount);
+
+            saveData(newEntry);
+        }
+    }
+
 }

@@ -25,4 +25,7 @@
     <string name="error_incorrect_password">This password is incorrect</string>
     <string name="error_field_required">This field is required</string>
     <string name="error_payee_exists">This payee already exists</string>
+    <string name="error_invalid_date">The date entered is invalid use mm/dd/yyyy format</string>
+    <string name="error_invalid_amount">The amount entered is invalid use xx.xx format</string>
+    <string name="error_note_length_exceeded">Field cannot exceed 120 characters</string>
 </resources>

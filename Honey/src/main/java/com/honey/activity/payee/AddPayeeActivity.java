@@ -66,6 +66,8 @@ public class AddPayeeActivity extends BaseActivity {
         sw = (Switch)findViewById(R.id.sw);
         sw.setChecked(false);
 
+        getActionBar().setDisplayHomeAsUpEnabled(true);
+
         findViewById(R.id.btnSave).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -115,6 +117,11 @@ public class AddPayeeActivity extends BaseActivity {
         phone = txtPhone.getText().toString().trim();
         url = txtUrl.getText().toString().trim();
         account = txtAccount.getText().toString().trim();
+
+        if (notes.length() > 120) {
+            txtNotes.setError(getString(R.string.error_note_length_exceeded));
+            rval = true;
+        }
 
         if (TextUtils.isEmpty(name)) {
             txtName.setError(getString(R.string.error_field_required));

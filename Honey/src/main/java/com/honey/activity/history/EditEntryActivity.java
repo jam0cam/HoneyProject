@@ -34,6 +34,10 @@ public class EditEntryActivity extends BaseActivity {
     protected Button btnSave;
     protected SimpleDateFormat formatter = new SimpleDateFormat("MM/dd/yyyy");
 
+    protected String notes;
+    protected Date date;
+    protected String amount;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -61,28 +65,62 @@ public class EditEntryActivity extends BaseActivity {
             btnSave.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-
-                    EntryCommand newEntry = new EntryCommand();
-                    newEntry.setPayee(entry.getPayee());
-                    newEntry.setId(entry.getId());
-
-                    //these are the editable data
-                    newEntry.setNotes(txtNotes.getText().toString());
-                    newEntry.setDate(new Date(txtDate.getText().toString()));
-                    newEntry.setAmount(txtAmount.getText().toString());
-                    saveData(newEntry);
+                    attemptSave();
                 }
             });
         }
     }
 
+    protected void attemptSave() {
+        boolean hasErrors = hasErrors();
+
+        if (!hasErrors) {
+            EntryCommand newEntry = new EntryCommand();
+            newEntry.setPayee(entry.getPayee());
+            newEntry.setId(entry.getId());
+
+            //these are the editable data
+            newEntry.setNotes(notes);
+            newEntry.setDate(date);
+            newEntry.setAmount(amount);
+
+            saveData(newEntry);
+        }
+    }
+
+    protected boolean hasErrors() {
+        boolean rval = false;
+
+        notes = txtNotes.getText().toString().trim();
+        if (notes.length() > 120) {
+            txtNotes.setError(getString(R.string.error_note_length_exceeded));
+            rval = true;
+        }
+
+        try {
+            date = new Date(txtDate.getText().toString().trim());
+        } catch (Exception e) {
+            txtDate.setError(getString(R.string.error_invalid_date));
+            rval = true;
+        }
+
+        try {
+            Double.parseDouble(txtAmount.getText().toString().trim());
+            amount = txtAmount.getText().toString().trim();
+        } catch (Exception e) {
+            txtAmount.setError(getString(R.string.error_invalid_amount));
+            rval = true;
+        }
+
+
+        return rval;
+    }
 
     @Override
     public void onSaveInstanceState(Bundle outState) {
         outState.putSerializable("entry", entry);
         super.onSaveInstanceState(outState);
     }
-
 
     protected void saveData(EntryCommand entry) {
         RequestQueue queue = Volley.newRequestQueue(getApplicationContext());
@@ -111,5 +149,4 @@ public class EditEntryActivity extends BaseActivity {
         getMenuInflater().inflate(R.menu.edit_entry, menu);
         return true;
     }
-    
 }
