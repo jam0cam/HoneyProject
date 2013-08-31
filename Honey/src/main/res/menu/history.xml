@@ -4,8 +4,16 @@
           android:orderInCategory="100"
           android:icon="@android:drawable/ic_menu_add"
           android:showAsAction="always" />
+    <item android:id="@+id/action_recent_history"
+          android:title="@string/title_activity_recent_history"
+          android:orderInCategory="100"
+          android:showAsAction="never" />
     <item android:id="@+id/action_payee_list"
         android:title="Payees"
         android:orderInCategory="100"
         android:showAsAction="never" />
+    <item android:id="@+id/action_pingpong"
+          android:title="Ping Pong"
+          android:orderInCategory="100"
+          android:showAsAction="never" />
 </menu>

@@ -30,7 +30,7 @@ public class HistoryActivity extends BaseActivity implements HistoryItemFragment
     private ArrayList<Payee> allPayees;
     private ArrayList<String> uniquePayees;
 
-    private ProgressDialog pd;
+
 
 
     @Override
@@ -97,6 +97,7 @@ public class HistoryActivity extends BaseActivity implements HistoryItemFragment
 
             @Override
             public void onErrorResponse(VolleyError error) {
+                showToastError();
             }
         });
 
@@ -121,6 +122,7 @@ public class HistoryActivity extends BaseActivity implements HistoryItemFragment
 
             @Override
             public void onErrorResponse(VolleyError error) {
+                showToastError();
             }
         });
 
@@ -194,11 +196,5 @@ public class HistoryActivity extends BaseActivity implements HistoryItemFragment
     @Override
     public void dataChanged() {
         restartActivity();
-    }
-
-    private void restartActivity(){
-        Intent intent = getIntent();
-        finish();
-        startActivity(intent);
     }
 }

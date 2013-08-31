@@ -1,7 +1,6 @@
 package com.honey.activity.history;
 
 import android.os.Bundle;
-import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -20,7 +19,6 @@ import com.honey.common.Util;
 
 import org.json.JSONObject;
 
-import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class EditEntryActivity extends BaseActivity {
@@ -32,7 +30,6 @@ public class EditEntryActivity extends BaseActivity {
     protected EditText txtNotes;
     protected TextView txtPayee;
     protected Button btnSave;
-    protected SimpleDateFormat formatter = new SimpleDateFormat("MM/dd/yyyy");
 
     protected String notes;
     protected Date date;
@@ -55,8 +52,8 @@ public class EditEntryActivity extends BaseActivity {
         txtNotes = (EditText)findViewById(R.id.txtNotes);
         btnSave = (Button)findViewById(R.id.btnSave);
 
-        //when entry == null, this is potentially a call from AddEditActivity
-        if (entry != null) {
+        //when entry == null, this is potentially a call from AddActivity
+        if (entry != null && entry.getId() != null) {
             txtPayee.setText(entry.getPayee().getName());
             txtNotes.setText(entry.getNotes());
             txtDate.setText(formatter.format(entry.getDate()));
@@ -141,12 +138,5 @@ public class EditEntryActivity extends BaseActivity {
         });
 
         queue.add(request);
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.edit_entry, menu);
-        return true;
     }
 }

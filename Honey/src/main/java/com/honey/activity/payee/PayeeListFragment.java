@@ -84,6 +84,7 @@ public class PayeeListFragment extends Fragment {
 
             @Override
             public void onErrorResponse(VolleyError error) {
+
             }
         });
 
@@ -104,6 +105,7 @@ public class PayeeListFragment extends Fragment {
     public interface OnItemSelectedListener {
         public void onItemSelected(Payee payee);
         public void onFillingList(ArrayList<Payee> payees);
+        public void error();
     }
 
     @Override

@@ -1,6 +1,5 @@
 package com.honey.activity;
 
-import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
@@ -29,13 +28,11 @@ import org.json.JSONObject;
  * Activity which displays a login screen to the user, offering registration as
  * well.
  */
-public class LoginActivity extends Activity {
+public class LoginActivity extends BaseActivity {
 
     // Values for email and password at the time of the login attempt.
     private String mEmail = "";
     private String mPassword = "";
-
-    private ProgressDialog pd;
 
     // UI references.
     private EditText mEmailView;

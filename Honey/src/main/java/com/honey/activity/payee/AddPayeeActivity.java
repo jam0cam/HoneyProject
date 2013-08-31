@@ -2,7 +2,6 @@ package com.honey.activity.payee;
 
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.view.Menu;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.NumberPicker;
@@ -81,13 +80,6 @@ public class AddPayeeActivity extends BaseActivity {
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
         outState.putSerializable("payees", existingPayees);
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.payee, menu);
-        return true;
     }
 
     protected void attemptSave() {

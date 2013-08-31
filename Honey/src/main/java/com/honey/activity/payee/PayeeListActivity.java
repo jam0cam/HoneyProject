@@ -19,9 +19,6 @@ public class PayeeListActivity extends BaseActivity implements PayeeListFragment
     private ArrayList<Payee> payees = null;
     private Payee selectedPayee = null;
 
-    private ProgressDialog pd;
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -58,6 +55,12 @@ public class PayeeListActivity extends BaseActivity implements PayeeListFragment
         super.onSaveInstanceState(outState);
         outState.putSerializable("payees", payees);
         outState.putSerializable("selectedPayee", selectedPayee);
+    }
+
+    @Override
+    public void error() {
+        showToastError();
+        if (pd != null && pd.isShowing()){pd.dismiss();}
     }
 
     @Override
@@ -144,11 +147,5 @@ public class PayeeListActivity extends BaseActivity implements PayeeListFragment
         //reload the list fragment
         PayeeListFragment listFragment = (PayeeListFragment)getFragmentManager().findFragmentById(R.id.frgPayeeList);
         listFragment.fetchPayees();
-    }
-
-    public void restartActivity(){
-        Intent intent = getIntent();
-        finish();
-        startActivity(intent);
     }
 }

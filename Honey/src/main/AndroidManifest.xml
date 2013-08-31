@@ -19,8 +19,8 @@
             android:label="@string/title_activity_add_payee" >
         </activity>
         <activity
-                android:name="com.honey.activity.payee.EditPayeeActivity"
-                android:label="@string/title_activity_edit_payee" >
+            android:name="com.honey.activity.payee.EditPayeeActivity"
+            android:label="@string/title_activity_edit_payee" >
         </activity>
         <activity
             android:name="com.honey.activity.LoginActivity"
@@ -30,11 +30,6 @@
         <activity
             android:name="com.honey.activity.payee.PayeeListActivity"
             android:label="@string/title_activity_view_payee_list" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity
             android:name="com.honey.activity.payee.PayeeDetailActivity"
@@ -45,12 +40,33 @@
             android:label="@string/title_activity_history" >
         </activity>
         <activity
-            android:name=".activity.history.EditEntryActivity"
+            android:name="com.honey.activity.history.EditEntryActivity"
             android:label="@string/title_activity_edit_entry" >
         </activity>
         <activity
-                android:name=".activity.history.AddEntryActivity"
-                android:label="@string/title_activity_add_entry" >
+            android:name="com.honey.activity.history.AddEntryActivity"
+            android:label="@string/title_activity_add_entry" >
+        </activity>
+        <activity
+            android:name="com.honey.activity.pingpong.PingPongActivity"
+            android:label="@string/title_activity_ping_pong" >
+        </activity>
+        <activity
+            android:name="com.honey.activity.pingpong.PPStatsActivity"
+            android:label="@string/title_activity_ppstats" >
+        </activity>
+        <activity
+            android:name="com.honey.activity.pingpong.PingPongStatsActivity"
+            android:label="@string/title_activity_ping_pong_stats" >
+        </activity>
+        <activity
+            android:name=".activity.history.RecentHistoryActivity"
+            android:label="@string/title_activity_recent_history" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
     </application>
 

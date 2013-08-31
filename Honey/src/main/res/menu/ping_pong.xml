@@ -1,9 +1,12 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:id="@+id/action_add_payee"
-          android:title="Add Payee"
+    <item android:id="@+id/action_ping_pong_stats"
+          android:title="Ping Pong Stats"
           android:orderInCategory="100"
-          android:icon="@android:drawable/ic_menu_add"
-          android:showAsAction="always" />
+          android:showAsAction="never" />
+    <item android:id="@+id/action_payee_list"
+          android:title="Payees"
+          android:orderInCategory="100"
+          android:showAsAction="never" />
     <item android:id="@+id/action_history"
           android:title="History"
           android:orderInCategory="100"
@@ -13,8 +16,4 @@
           android:orderInCategory="100"
           android:icon="@android:drawable/ic_menu_add"
           android:showAsAction="always" />
-    <item android:id="@+id/action_pingpong"
-          android:title="Ping Pong"
-          android:orderInCategory="100"
-          android:showAsAction="never" />
 </menu>

@@ -1,19 +1,34 @@
 package com.honey.activity;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.honey.R;
 import com.honey.activity.history.HistoryActivity;
+import com.honey.activity.history.RecentHistoryActivity;
 import com.honey.activity.payee.PayeeListActivity;
+import com.honey.activity.pingpong.PingPongActivity;
+import com.honey.activity.pingpong.PingPongStatsActivity;
+
+import java.text.SimpleDateFormat;
 
 /**
  * Created by jitse on 8/18/13.
  */
 public class BaseActivity extends Activity {
+    protected ProgressDialog pd;
+    protected SimpleDateFormat formatter = new SimpleDateFormat("MM/dd/yyyy");
+    protected SimpleDateFormat parser = new SimpleDateFormat("yyyy-MM-dd");
 
+
+    protected void showToastError(){
+        if (pd != null && pd.isShowing()){pd.dismiss();}
+        Toast toast = Toast.makeText(this, "Error.", Toast.LENGTH_SHORT);
+        toast.show();
+    }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -29,6 +44,18 @@ public class BaseActivity extends Activity {
             case R.id.action_history:
                 Intent historyIntent = new Intent(this, HistoryActivity.class);
                 startActivity(historyIntent);
+                return true;
+            case R.id.action_pingpong:
+                Intent pingpongIntent = new Intent(this, PingPongActivity.class);
+                startActivity(pingpongIntent);
+                return true;
+            case R.id.action_ping_pong_stats:
+                Intent statsIntent = new Intent(this, PingPongStatsActivity.class);
+                startActivity(statsIntent);
+                return true;
+            case R.id.action_recent_history:
+                Intent recentHistoryIntent = new Intent(this, RecentHistoryActivity.class);
+                startActivity(recentHistoryIntent);
                 return true;
         }
         return super.onOptionsItemSelected(item);
@@ -46,5 +73,11 @@ public class BaseActivity extends Activity {
         Intent returnIntent = new Intent();
         setResult(RESULT_OK,returnIntent);
         finish();
+    }
+
+    public void restartActivity(){
+        Intent intent = getIntent();
+        finish();
+        startActivity(intent);
     }
 }
