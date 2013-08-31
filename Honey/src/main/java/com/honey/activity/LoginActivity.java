@@ -3,9 +3,10 @@ package com.honey.activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Html;
 import android.text.TextUtils;
+import android.text.method.LinkMovementMethod;
 import android.view.KeyEvent;
-import android.view.Menu;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
@@ -18,7 +19,7 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.common.User;
 import com.honey.R;
-import com.honey.activity.payee.PayeeListActivity;
+import com.honey.activity.history.RecentHistoryActivity;
 import com.honey.common.MyApp;
 import com.honey.common.Util;
 
@@ -38,11 +39,22 @@ public class LoginActivity extends BaseActivity {
     private EditText mEmailView;
     private EditText mPasswordView;
 
+    private TextView txtWebVersion;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_login);
+
+        //check for login, if logged in, then redirect to recent history page
+        if (((MyApp)getApplication()).getUserId() != null){
+            goToRecentHistory();
+        }
+
+        txtWebVersion = (TextView)findViewById(R.id.txtWebVersion);
+        txtWebVersion.setText(Html.fromHtml(getResources().getString(R.string.url_web_version)));
+        txtWebVersion.setMovementMethod(LinkMovementMethod.getInstance());
 
         // Set up the login form.
         mEmailView = (EditText) findViewById(R.id.email);
@@ -67,15 +79,6 @@ public class LoginActivity extends BaseActivity {
             }
         });
 
-        mEmailView.setText("jam0cam@yahoo.com");
-        mPasswordView.setText("test");
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        super.onCreateOptionsMenu(menu);
-        getMenuInflater().inflate(R.menu.login, menu);
-        return true;
     }
 
     /**
@@ -151,14 +154,13 @@ public class LoginActivity extends BaseActivity {
 
 
     private void succeedLogin(User user) {
-        ((MyApp)this.getApplication()).setUserId(user.getId());
+        ((MyApp)this.getApplication()).saveUser(user.getId());
         //succeeds login
-        goToPayee();
-
+        goToRecentHistory();
     }
 
-    private void goToPayee() {
-        Intent intent = new Intent(this, PayeeListActivity.class);
+    private void goToRecentHistory() {
+        Intent intent = new Intent(this, RecentHistoryActivity.class);
         startActivity(intent);
         finish();
     }

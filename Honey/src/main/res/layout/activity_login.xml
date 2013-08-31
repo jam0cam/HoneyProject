@@ -41,6 +41,14 @@
                 android:paddingRight="32dp"
                 android:layout_gravity="right" />
 
+            <TextView
+                    android:id="@+id/txtWebVersion"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="50dp"
+                    android:linksClickable="true"
+                    android:gravity="center_horizontal"
+                    />
         </LinearLayout>
 
     </ScrollView>

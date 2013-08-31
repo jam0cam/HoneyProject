@@ -12,6 +12,7 @@ import com.honey.activity.history.RecentHistoryActivity;
 import com.honey.activity.payee.PayeeListActivity;
 import com.honey.activity.pingpong.PingPongActivity;
 import com.honey.activity.pingpong.PingPongStatsActivity;
+import com.honey.common.MyApp;
 
 import java.text.SimpleDateFormat;
 
@@ -57,6 +58,11 @@ public class BaseActivity extends Activity {
                 Intent recentHistoryIntent = new Intent(this, RecentHistoryActivity.class);
                 startActivity(recentHistoryIntent);
                 return true;
+            case R.id.action_logout:
+                Intent loginIntent = new Intent(this, LoginActivity.class);
+                ((MyApp)getApplication()).logout();
+                startActivity(loginIntent);
+                return true;
         }
         return super.onOptionsItemSelected(item);
     }
@@ -73,6 +79,14 @@ public class BaseActivity extends Activity {
         Intent returnIntent = new Intent();
         setResult(RESULT_OK,returnIntent);
         finish();
+    }
+
+    @Override
+    protected void onResume() {
+        if (!((MyApp)getApplication()).isLoggedIn() && !(this instanceof LoginActivity)){
+            finish();
+        }
+        super.onResume();
     }
 
     public void restartActivity(){

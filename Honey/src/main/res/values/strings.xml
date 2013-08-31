@@ -29,5 +29,7 @@
     <string name="title_activity_ppstats">Ping Pong Stats</string>
     <string name="title_activity_ping_pong_stats">Ping Pong Stats</string>
     <string name="title_activity_recent_history">Recent History</string>
+    <string name="url_web_version">&lt;a href="http://honey.elasticbeanstalk.com">Click here to view web version&lt;/a></string>
+
 
 </resources>
