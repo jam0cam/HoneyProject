@@ -59,6 +59,11 @@
         <activity
             android:name="com.honey.activity.pingpong.PingPongStatsActivity"
             android:label="@string/title_activity_ping_pong_stats" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
         <activity
             android:name=".activity.history.RecentHistoryActivity"
