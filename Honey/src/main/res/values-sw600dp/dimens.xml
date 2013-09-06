@@ -1,4 +1,9 @@
 <resources>
     <!-- Customize dimensions originally defined in res/values/dimens.xml (such as
          screen margins) for sw600dp devices (e.g. 7" tablets) here. -->
+
+    <!--values for ping pong-->
+    <dimen name="tt_game_width">5sp</dimen>
+    <dimen name="tt_main_layout_padding">100dp</dimen>
+    <dimen name="tt_main_layout_top_padding">50dp</dimen>
 </resources>
