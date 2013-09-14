@@ -14,10 +14,6 @@
     <string name="url_get_recent_entries">http://honey.elasticbeanstalk.com/finance/service/entry/getEntriesLastNMonths/{month}/userId/{userId}</string>
     <string name="url_save_entry">http://honey.elasticbeanstalk.com/finance/service/entry/save</string>
     <string name="url_delete_entry">http://honey.elasticbeanstalk.com/finance/service/entry/delete</string>
-    <string name="url_get_games">http://honey.elasticbeanstalk.com/pingpong/service/games</string>
-    <string name="url_get_series">http://honey.elasticbeanstalk.com/pingpong/service/series</string>
-    <string name="url_get_recent_games">http://honey.elasticbeanstalk.com/pingpong/service/recentGames</string>
-    <string name="url_save_game">http://honey.elasticbeanstalk.com/pingpong/service/save</string>
     <string name="title_activity_view_payee">View Payees</string>
     <string name="title_activity_payee_detail">Payee</string>
     <string name="title_activity_history">Payment History</string>
@@ -25,9 +21,6 @@
     <string name="title_activity_add_entry">Add Entry</string>
     <string name="title_activity_add_payee">Add Payee</string>
     <string name="title_activity_edit_payee">Edit Payee</string>
-    <string name="title_activity_ping_pong">Ping Pong Series</string>
-    <string name="title_activity_ppstats">Ping Pong Stats</string>
-    <string name="title_activity_ping_pong_stats">Ping Pong Stats</string>
     <string name="title_activity_recent_history">Recent History</string>
     <string name="url_web_version">&lt;a href="http://honey.elasticbeanstalk.com">Click here to view web version&lt;/a></string>
 

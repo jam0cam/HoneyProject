@@ -13,10 +13,6 @@
           android:orderInCategory="100"
           android:showAsAction="never"
             />
-    <item android:id="@+id/action_pingpong"
-          android:title="Ping Pong"
-          android:orderInCategory="100"
-          android:showAsAction="never" />
     <item android:id="@+id/action_logout"
           android:title="Log Out"
           android:orderInCategory="100"

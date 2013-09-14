@@ -10,8 +10,6 @@ import com.honey.R;
 import com.honey.activity.history.HistoryActivity;
 import com.honey.activity.history.RecentHistoryActivity;
 import com.honey.activity.payee.PayeeListActivity;
-import com.honey.activity.pingpong.PingPongActivity;
-import com.honey.activity.pingpong.PingPongStatsActivity;
 import com.honey.common.MyApp;
 
 import java.text.SimpleDateFormat;
@@ -45,14 +43,6 @@ public class BaseActivity extends Activity {
             case R.id.action_history:
                 Intent historyIntent = new Intent(this, HistoryActivity.class);
                 startActivity(historyIntent);
-                return true;
-            case R.id.action_pingpong:
-                Intent pingpongIntent = new Intent(this, PingPongActivity.class);
-                startActivity(pingpongIntent);
-                return true;
-            case R.id.action_ping_pong_stats:
-                Intent statsIntent = new Intent(this, PingPongStatsActivity.class);
-                startActivity(statsIntent);
                 return true;
             case R.id.action_recent_history:
                 Intent recentHistoryIntent = new Intent(this, RecentHistoryActivity.class);
