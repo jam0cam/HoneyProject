@@ -22,7 +22,6 @@
     <string name="title_activity_add_payee">Add Payee</string>
     <string name="title_activity_edit_payee">Edit Payee</string>
     <string name="title_activity_recent_history">Recent History</string>
+    <string name="title_activity_more_apps">More Apps</string>
     <string name="url_web_version">&lt;a href="http://honey.elasticbeanstalk.com">Click here to view web version&lt;/a></string>
-
-
 </resources>

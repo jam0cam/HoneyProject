@@ -20,8 +20,6 @@ import java.text.SimpleDateFormat;
 public abstract class BaseActivity extends Activity {
     protected ProgressDialog pd;
     protected SimpleDateFormat formatter = new SimpleDateFormat("MM/dd/yyyy");
-    protected SimpleDateFormat parser = new SimpleDateFormat("yyyy-MM-dd");
-
 
     protected void showToastError(){
         if (pd != null && pd.isShowing()){pd.dismiss();}
@@ -52,6 +50,10 @@ public abstract class BaseActivity extends Activity {
                 Intent loginIntent = new Intent(this, LoginActivity.class);
                 ((MyApp)getApplication()).logout();
                 startActivity(loginIntent);
+                return true;
+            case R.id.action_more_apps:
+                Intent moreAppsIntent = new Intent(this, MoreAppsActivity.class);
+                startActivity(moreAppsIntent);
                 return true;
         }
         return super.onOptionsItemSelected(item);

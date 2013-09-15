@@ -29,6 +29,7 @@
             android:windowSoftInputMode="adjustResize|stateVisible" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -53,8 +54,12 @@
             android:label="@string/title_activity_add_entry" >
         </activity>
         <activity
-            android:name=".activity.history.RecentHistoryActivity"
+            android:name="com.honey.activity.history.RecentHistoryActivity"
             android:label="@string/title_activity_recent_history" >
+        </activity>
+        <activity
+            android:name="com.honey.activity.MoreAppsActivity"
+            android:label="@string/title_activity_more_apps" >
         </activity>
     </application>
 
