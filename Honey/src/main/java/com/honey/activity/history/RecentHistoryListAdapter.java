@@ -23,7 +23,7 @@ public class RecentHistoryListAdapter extends BaseExpandableListAdapter {
     private Activity context;
     private Map<String, List<EntryCommand>> entryCollections;
     private List<String> months;
-    private SimpleDateFormat formatter = new SimpleDateFormat("MM/dd/yyyy");
+    private SimpleDateFormat formatter = new SimpleDateFormat("MM/dd/yy");
 
     public RecentHistoryListAdapter(Activity context, List<String> laptops,
                                  Map<String, List<EntryCommand>> entryCollections) {
