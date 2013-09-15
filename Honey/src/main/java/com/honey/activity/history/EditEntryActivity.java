@@ -1,8 +1,8 @@
 package com.honey.activity.history;
 
 import android.os.Bundle;
-import android.view.View;
-import android.widget.Button;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -29,7 +29,6 @@ public class EditEntryActivity extends BaseActivity {
     protected EditText txtDate;
     protected EditText txtNotes;
     protected TextView txtPayee;
-    protected Button btnSave;
 
     protected String notes;
     protected Date date;
@@ -50,7 +49,6 @@ public class EditEntryActivity extends BaseActivity {
         txtAmount = (EditText)findViewById(R.id.txtAmount);
         txtDate = (EditText)findViewById(R.id.txtDate);
         txtNotes = (EditText)findViewById(R.id.txtNotes);
-        btnSave = (Button)findViewById(R.id.btnSave);
 
         //when entry == null, this is potentially a call from AddActivity
         if (entry != null && entry.getId() != null) {
@@ -58,13 +56,6 @@ public class EditEntryActivity extends BaseActivity {
             txtNotes.setText(entry.getNotes());
             txtDate.setText(formatter.format(entry.getDate()));
             txtAmount.setText(entry.getAmount());
-
-            btnSave.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    attemptSave();
-                }
-            });
         }
     }
 
@@ -112,6 +103,26 @@ public class EditEntryActivity extends BaseActivity {
 
         return rval;
     }
+
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        super.onCreateOptionsMenu(menu);
+        getMenuInflater().inflate(R.menu.edit_entry, menu);
+        return true;
+    }
+
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.action_save_entry:
+                attemptSave();
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
 
     @Override
     public void onSaveInstanceState(Bundle outState) {

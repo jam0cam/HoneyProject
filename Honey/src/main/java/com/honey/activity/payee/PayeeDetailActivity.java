@@ -2,6 +2,7 @@ package com.honey.activity.payee;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
@@ -21,7 +22,7 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-public class PayeeDetailActivity extends BaseActivity implements ISelectedPayee, PayeeDetailFragment.Listener {
+public class PayeeDetailActivity extends BaseActivity implements ISelectedPayee {
 
     private Payee payee;
     private ArrayList<Payee> payees;
@@ -41,7 +42,6 @@ public class PayeeDetailActivity extends BaseActivity implements ISelectedPayee,
         setContentView(R.layout.activity_payee_detail);
 
         fragment = (PayeeDetailFragment)getFragmentManager().findFragmentById(R.id.frgPayeeDetail);
-        fragment.setListener(this);
 
         getActionBar().setDisplayHomeAsUpEnabled(true);
 
@@ -51,7 +51,6 @@ public class PayeeDetailActivity extends BaseActivity implements ISelectedPayee,
     /**
      * Removes the payee via webservice call
      */
-    @Override
     public void removeButtonClicked() {
         RequestQueue queue = Volley.newRequestQueue(this);
         String url = getResources().getString(R.string.url_delete_payee);
@@ -74,7 +73,6 @@ public class PayeeDetailActivity extends BaseActivity implements ISelectedPayee,
         queue.add(request);
     }
 
-    @Override
     public void editButtonClicked() {
         Intent intent = new Intent(this, EditPayeeActivity.class);
         intent.putExtra("payee", payee);
@@ -114,7 +112,6 @@ public class PayeeDetailActivity extends BaseActivity implements ISelectedPayee,
         }
     }
 
-
     @Override
     public void onBackPressed() {
         if (payeeChanged){
@@ -132,12 +129,24 @@ public class PayeeDetailActivity extends BaseActivity implements ISelectedPayee,
         return payee;
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        super.onCreateOptionsMenu(menu);
+        getMenuInflater().inflate(R.menu.payee_detail, menu);
+        return true;
+    }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
                 onBackPressed();
+                return true;
+            case R.id.action_edit_payee:
+                editButtonClicked();
+                return true;
+            case R.id.action_remove_payee:
+                removeButtonClicked();
                 return true;
         }
         return super.onOptionsItemSelected(item);

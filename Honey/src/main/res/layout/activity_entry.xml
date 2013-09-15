@@ -57,14 +57,5 @@
                 android:minHeight="?android:attr/listPreferredItemHeight"
                 android:hint="@string/prompt_notes"
                 android:inputType="textMultiLine" />
-
-        <Button android:id="@+id/btnSave"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:text="@string/prompt_save"
-                android:paddingLeft="32dp"
-                android:paddingRight="32dp"
-                android:layout_gravity="right" />
     </LinearLayout>
 </RelativeLayout>

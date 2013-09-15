@@ -24,20 +24,9 @@ public class PayeeDetailFragment extends Fragment {
     private TextView txtUrl;
     private TextView txtNotifyDay;
     private ImageView imgAlarm;
-    private Listener listener;
-    private PayeeListActivity parentActivity;
 
     private ImageButton btnEdit;
     private ImageButton btnRemove;
-
-    public interface Listener{
-        public void removeButtonClicked();
-        public void editButtonClicked();
-    }
-
-    public void setListener(Listener listener) {
-        this.listener = listener;
-    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -53,20 +42,6 @@ public class PayeeDetailFragment extends Fragment {
         
         btnEdit = (ImageButton)view.findViewById(R.id.btnEdit);
         btnRemove = (ImageButton)view.findViewById(R.id.btnRemove);
-
-        btnEdit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                listener.editButtonClicked();
-            }
-        });
-
-        btnRemove.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                listener.removeButtonClicked();
-            }
-        });
 
         payee = ((ISelectedPayee)getActivity()).getSelectedPayee();
         reDraw();

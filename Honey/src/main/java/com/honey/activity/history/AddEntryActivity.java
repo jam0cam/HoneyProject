@@ -52,13 +52,6 @@ public class AddEntryActivity  extends EditEntryActivity {
 
         //since it's inheriting EditEntry, this could possibly be created.
         entry = new EntryCommand();
-
-        btnSave.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-               attemptSave();
-            }
-        });
     }
 
     protected void attemptSave() {
