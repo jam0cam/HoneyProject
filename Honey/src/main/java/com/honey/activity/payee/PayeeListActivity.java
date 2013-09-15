@@ -1,7 +1,5 @@
 package com.honey.activity.payee;
 
-import android.app.Fragment;
-import android.app.FragmentTransaction;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
@@ -32,13 +30,6 @@ public class PayeeListActivity extends BaseActivity implements PayeeListFragment
 
         if (payees == null) {
             pd = ProgressDialog.show(this,"Fetching Payees","Loading");
-        }
-
-        if (findViewById(R.id.fragment_container) != null && selectedPayee != null) {
-            if (getFragmentManager().findFragmentByTag("detailFragment") == null) {
-                //this means it is the first time loading, and the fragment doesn't exist yet
-                createDetailFragment();
-            }
         }
     }
 
@@ -71,15 +62,6 @@ public class PayeeListActivity extends BaseActivity implements PayeeListFragment
         }
 
         if (pd != null && pd.isShowing()){pd.dismiss();}
-
-        //this should only happen once. On the first time it fills out the payee, the detail
-        //fragment may not exist in landscape mode. Add it
-        if (findViewById(R.id.fragment_container) != null) {
-            if (getFragmentManager().findFragmentByTag("detailFragment") == null) {
-                //this means it is the first time loading, and the fragment doesn't exist yet
-                createDetailFragment();
-            }
-        }
     }
 
     public ArrayList<Payee> getPayees() {
@@ -90,24 +72,15 @@ public class PayeeListActivity extends BaseActivity implements PayeeListFragment
         return selectedPayee;
     }
 
-    private void createDetailFragment() {
-        PayeeDetailFragment fragment = new PayeeDetailFragment(this, payees);
-        FragmentTransaction transaction = getFragmentManager().beginTransaction();
-        transaction.replace(R.id.fragment_container, fragment, "detailFragment");
-        transaction.commit();
-    }
-
     @Override
     public void onItemSelected(Payee payee) {
         this.selectedPayee = payee;
-        if (findViewById(R.id.fragment_container) != null) {
-            //landscape mode
-            createDetailFragment();
-        } else {
-            Intent intent = new Intent(this, PayeeDetailActivity.class);
-            intent.putExtra("payee", payee);
-            startActivity(intent);
-        }
+
+        Intent intent = new Intent(this, PayeeDetailActivity.class);
+        intent.putExtra("payee", payee);
+        intent.putExtra("payees", payees);
+
+        startActivityForResult(intent,0);
     }
 
     @Override
@@ -124,10 +97,12 @@ public class PayeeListActivity extends BaseActivity implements PayeeListFragment
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (requestCode == 1) {
-            if(resultCode == RESULT_OK){
-                restartActivity();
-            }
+        if(resultCode == RESULT_OK){
+            restartActivity();
+        } else if (resultCode == PayeeDetailActivity.PAYEE_REMOVED){
+            softRestartActivity();
+        } else if (resultCode == PayeeDetailActivity.PAYEE_CHANGED){
+            softRestartActivity();
         }
     }
 
@@ -135,12 +110,6 @@ public class PayeeListActivity extends BaseActivity implements PayeeListFragment
      * This is used so that the activity doesn't *appear* to be reloaded
      */
     public void softRestartActivity() {
-        //remove the current fragment
-        FragmentTransaction transaction = getFragmentManager().beginTransaction();
-        Fragment frag = getFragmentManager().findFragmentByTag("detailFragment");
-        transaction.remove(frag);
-        transaction.commit();
-
         payees = null;
         selectedPayee = null;
 

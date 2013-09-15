@@ -1,7 +1,6 @@
 package com.honey.activity.payee;
 
 import android.app.Fragment;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,30 +8,14 @@ import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.Volley;
-import com.finance.model.DeleteObject;
 import com.finance.model.Payee;
 import com.honey.R;
-import com.honey.common.Util;
-
-import org.json.JSONObject;
-
-import java.util.ArrayList;
 
 /**
  * Created by jitse on 8/16/13.
  */
 public class PayeeDetailFragment extends Fragment {
-
-    private ArrayList<Payee> payees;
-
     private Payee payee;
     private TextView txtName;
     private TextView txtAccount;
@@ -41,17 +24,19 @@ public class PayeeDetailFragment extends Fragment {
     private TextView txtUrl;
     private TextView txtNotifyDay;
     private ImageView imgAlarm;
-
+    private Listener listener;
     private PayeeListActivity parentActivity;
 
     private ImageButton btnEdit;
     private ImageButton btnRemove;
 
-    public PayeeDetailFragment(){}
+    public interface Listener{
+        public void removeButtonClicked();
+        public void editButtonClicked();
+    }
 
-    public PayeeDetailFragment(PayeeListActivity activity, ArrayList<Payee> payees) {
-        parentActivity = activity;
-        this.payees = payees;
+    public void setListener(Listener listener) {
+        this.listener = listener;
     }
 
     @Override
@@ -72,17 +57,14 @@ public class PayeeDetailFragment extends Fragment {
         btnEdit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getActivity(), EditPayeeActivity.class);
-                intent.putExtra("payee", payee);
-                intent.putExtra("payees", payees);
-                startActivityForResult(intent, 1);
+                listener.editButtonClicked();
             }
         });
 
         btnRemove.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                removePayee();
+                listener.removeButtonClicked();
             }
         });
 
@@ -91,47 +73,8 @@ public class PayeeDetailFragment extends Fragment {
         return view;
     }
 
-    private void removePayee() {
-        RequestQueue queue = Volley.newRequestQueue(parentActivity);
-        String url = parentActivity.getResources().getString(R.string.url_delete_payee);
-        DeleteObject entry = new DeleteObject(payee.getId());
-        JSONObject obj = Util.toJsonObject(entry);
-
-        JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, url, obj, new Response.Listener<JSONObject>() {
-            @Override
-            public void onResponse(JSONObject response) {
-                removeSuccessful(payee.getId());
-            }
-        }, new Response.ErrorListener() {
-
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                saveFailed();
-            }
-        });
-
-        queue.add(request);
-    }
-
-
-    private void removeSuccessful(String tag) {
-        Toast toast = Toast.makeText(parentActivity, "Payee deleted.", Toast.LENGTH_SHORT);
-        toast.show();
-
-        parentActivity.softRestartActivity();
-    }
-
-    private void saveFailed() {
-        Toast toast = Toast.makeText(parentActivity, "Failed to delete payee.", Toast.LENGTH_SHORT);
-        toast.show();
-    }
-
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (resultCode == getActivity().RESULT_OK){
-            parentActivity.restartActivity();
-        }
+    public void setPayee(Payee payee) {
+        this.payee = payee;
     }
 
     public void reDraw() {

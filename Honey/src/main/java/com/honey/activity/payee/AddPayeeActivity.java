@@ -1,11 +1,13 @@
 package com.honey.activity.payee;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.NumberPicker;
 import android.widget.Switch;
+import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -132,7 +134,7 @@ public class AddPayeeActivity extends BaseActivity {
         return rval;
     }
 
-    protected void saveData(Payee payee) {
+    protected void saveData(final Payee payee) {
         RequestQueue queue = Volley.newRequestQueue(getApplicationContext());
         String url = getResources().getString(R.string.url_save_payee);
         JSONObject obj = Util.toJsonObject(payee);
@@ -140,7 +142,7 @@ public class AddPayeeActivity extends BaseActivity {
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, url, obj, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
-                saveSuccessful();
+                saveSuccessful(payee);
             }
         }, new Response.ErrorListener() {
             @Override
@@ -149,6 +151,16 @@ public class AddPayeeActivity extends BaseActivity {
             }
         });
         queue.add(request);
+    }
+
+    protected void saveSuccessful(Payee payee) {
+        Toast toast = Toast.makeText(this, "Saved.", Toast.LENGTH_SHORT);
+        toast.show();
+
+        Intent returnIntent = new Intent();
+        returnIntent.putExtra("payee", payee);
+        setResult(RESULT_OK,returnIntent);
+        finish();
     }
 
 }
