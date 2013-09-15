@@ -12,7 +12,7 @@
         android:name="com.honey.common.MyApp"
         android:allowBackup="true"
         android:debuggable="true"
-        android:icon="@drawable/ic_launcher"
+        android:icon="@drawable/finance"
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity

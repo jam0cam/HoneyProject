@@ -16,7 +16,6 @@
     <!-- Application theme. -->
     <style name="AppTheme" parent="AppBaseTheme">
         <!-- All customizations that are NOT specific to a particular API-level can go here. -->
-        <item name="android:textViewStyle">@style/customTextView</item>
     </style>
 
     <style name="LoginFormContainer">
@@ -26,12 +25,9 @@
     </style>
 
     <style name="headingFontSize">
-        <item name="android:textSize">40sp</item>
-        <item name="android:height">70sp</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:height">40sp</item>
     </style>
 
-    <style name="customTextView" parent="@android:style/Widget.TextView">
-        <item name="android:textSize">22sp</item>
-    </style>
 
 </resources>

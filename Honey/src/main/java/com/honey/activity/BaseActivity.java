@@ -17,7 +17,7 @@ import java.text.SimpleDateFormat;
 /**
  * Created by jitse on 8/18/13.
  */
-public class BaseActivity extends Activity {
+public abstract class BaseActivity extends Activity {
     protected ProgressDialog pd;
     protected SimpleDateFormat formatter = new SimpleDateFormat("MM/dd/yyyy");
     protected SimpleDateFormat parser = new SimpleDateFormat("yyyy-MM-dd");
@@ -84,4 +84,9 @@ public class BaseActivity extends Activity {
         finish();
         startActivity(intent);
     }
+
+    /**
+     * This is used so that the activity doesn't *appear* to be reloaded
+     */
+    public void softRestartActivity() {}
 }

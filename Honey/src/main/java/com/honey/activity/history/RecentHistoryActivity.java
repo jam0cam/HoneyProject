@@ -83,12 +83,12 @@ public class RecentHistoryActivity extends BaseActivity {
                 for (EntryCommand e : entriesArray) {
                     entries.add(e);
                     if(currentMonth != e.getDate().getMonth()) {
-                        groupList.add(Util.getMonthName(currentMonth));
+                        groupList.add(Util.getMonthName(currentMonth+1));
                         currentMonth = e.getDate().getMonth();
                     }
                 }
 
-                groupList.add(Util.getMonthName(currentMonth));
+                groupList.add(Util.getMonthName(currentMonth+1));
                 createCollection();
             }
         }, new Response.ErrorListener() {
@@ -107,7 +107,7 @@ public class RecentHistoryActivity extends BaseActivity {
         for (String s : groupList) {
             List<EntryCommand> tempList = new ArrayList<EntryCommand>();
             for (EntryCommand e : entries){
-                if (s.equals(Util.getMonthName(e.getDate().getMonth()))){
+                if (s.equals(Util.getMonthName(e.getDate().getMonth()+1))){
                     tempList.add(e);
                 }
             }

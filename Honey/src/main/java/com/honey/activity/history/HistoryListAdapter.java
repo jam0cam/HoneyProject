@@ -7,7 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -64,8 +64,8 @@ public class HistoryListAdapter extends BaseAdapter {
 
         TextView txtDate = (TextView)vi.findViewById(R.id.txtDate); // title
         TextView txtAmount = (TextView)vi.findViewById(R.id.txtAmount); // artist name
-        ImageButton btnRemove = (ImageButton)vi.findViewById(R.id.btnRemove);
-        ImageButton btnEdit = (ImageButton)vi.findViewById(R.id.btnEdit);
+        ImageView btnRemove = (ImageView)vi.findViewById(R.id.btnRemove);
+        ImageView btnEdit = (ImageView)vi.findViewById(R.id.btnEdit);
 
         btnRemove.setOnClickListener(new View.OnClickListener() {
             @Override
