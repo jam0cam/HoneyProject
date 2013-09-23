@@ -13,6 +13,11 @@
         -->
     </style>
 
+    <style name="MyTextViewStyle" parent="android:Widget.TextView">
+        <item name="android:textAppearance">?android:attr/textAppearanceListItemSmall</item>
+        <item name="android:minHeight">?android:attr/listPreferredItemHeightSmall</item>
+    </style>
+
     <!-- Application theme. -->
     <style name="AppTheme" parent="AppBaseTheme">
         <!-- All customizations that are NOT specific to a particular API-level can go here. -->
@@ -28,6 +33,4 @@
         <item name="android:textSize">20sp</item>
         <item name="android:height">40sp</item>
     </style>
-
-
 </resources>

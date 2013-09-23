@@ -14,6 +14,10 @@
     <string name="url_get_recent_entries">http://honey.elasticbeanstalk.com/finance/service/entry/getEntriesLastNMonths/{month}/userId/{userId}</string>
     <string name="url_save_entry">http://honey.elasticbeanstalk.com/finance/service/entry/save</string>
     <string name="url_delete_entry">http://honey.elasticbeanstalk.com/finance/service/entry/delete</string>
+
+    <string name="url_get_monthly_expense">http://honey.elasticbeanstalk.com/finance/service/entry/mobile/monthlyExpense/userId/{userId}</string>
+    <string name="url_get_payee_expense">http://honey.elasticbeanstalk.com/finance/service/entry/mobile/payeeExpense/userId/{userId}</string>
+
     <string name="title_activity_view_payee">View Payees</string>
     <string name="title_activity_payee_detail">Payee</string>
     <string name="title_activity_history">Payment History</string>
@@ -24,4 +28,9 @@
     <string name="title_activity_recent_history">Recent History</string>
     <string name="title_activity_more_apps">More Apps</string>
     <string name="url_web_version">&lt;a href="http://honey.elasticbeanstalk.com">Click here to view web version&lt;/a></string>
+    <string name="title_activity_stats">Stats</string>
+
+    <string name="title_section1">Monthly Stats</string>
+    <string name="title_section2">Payee Stats</string>
+
 </resources>

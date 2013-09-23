@@ -1,14 +1,15 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/action_recent_history"
+        android:title="@string/title_activity_recent_history"
+        android:orderInCategory="100"
+        android:showAsAction="never" />
     <item android:id="@+id/action_history"
-          android:title="History"
-          android:orderInCategory="100"
-            />
+        android:title="History"
+        android:orderInCategory="100"
+        android:showAsAction="never"
+        />
     <item android:id="@+id/action_payee_list"
-          android:title="Payees"
-          android:orderInCategory="100"
-          android:showAsAction="never" />
-    <item android:id="@+id/action_stats"
-        android:title="Stats"
+        android:title="Payees"
         android:orderInCategory="100"
         android:showAsAction="never" />
     <item android:id="@+id/action_more_apps"
@@ -16,7 +17,7 @@
         android:orderInCategory="100"
         android:showAsAction="never" />
     <item android:id="@+id/action_logout"
-          android:title="Log Out"
-          android:orderInCategory="100"
-          android:showAsAction="never" />
+        android:title="Log Out"
+        android:orderInCategory="100"
+        android:showAsAction="never" />
 </menu>

@@ -61,6 +61,10 @@
             android:name="com.honey.activity.MoreAppsActivity"
             android:label="@string/title_activity_more_apps" >
         </activity>
+        <activity
+            android:name="com.honey.activity.stats.StatsActivity"
+            android:label="@string/title_activity_stats" >
+        </activity>
     </application>
 
     <uses-permission android:name="android.permission.INTERNET" />

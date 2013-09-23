@@ -1,10 +1,8 @@
 package com.honey.activity;
 
-import android.app.Activity;
-import android.app.ProgressDialog;
 import android.content.Intent;
+import android.support.v4.app.FragmentActivity;
 import android.view.MenuItem;
-import android.widget.Toast;
 
 import com.honey.R;
 import com.honey.activity.history.HistoryActivity;
@@ -13,23 +11,10 @@ import com.honey.activity.payee.PayeeListActivity;
 import com.honey.activity.stats.StatsActivity;
 import com.honey.common.MyApp;
 
-import java.text.SimpleDateFormat;
-
-/**
- * Created by jitse on 8/18/13.
- */
-public abstract class BaseActivity extends Activity {
-    protected ProgressDialog pd;
-    protected SimpleDateFormat formatter = new SimpleDateFormat("MM/dd/yyyy");
-
-    protected void showToastError(){
-        if (pd != null && pd.isShowing()){pd.dismiss();}
-        Toast toast = Toast.makeText(this, "Error.", Toast.LENGTH_SHORT);
-        toast.show();
-    }
+public class BaseFragmentActivity extends FragmentActivity {
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
+    public boolean onMenuItemSelected(int featureId, MenuItem item) {
         switch (item.getItemId()) {
             // Respond to the action bar's Up/Home button
             case android.R.id.home:
@@ -60,39 +45,6 @@ public abstract class BaseActivity extends Activity {
                 Intent statsIntent = new Intent(this, StatsActivity.class);
                 startActivity(statsIntent);
         }
-        return super.onOptionsItemSelected(item);
+        return super.onMenuItemSelected(featureId, item);
     }
-
-    protected void saveFailed() {
-        Toast toast = Toast.makeText(this, "Failed to save.", Toast.LENGTH_SHORT);
-        toast.show();
-    }
-
-    protected void saveSuccessful() {
-        Toast toast = Toast.makeText(this, "Saved.", Toast.LENGTH_SHORT);
-        toast.show();
-
-        Intent returnIntent = new Intent();
-        setResult(RESULT_OK,returnIntent);
-        finish();
-    }
-
-    @Override
-    protected void onResume() {
-        if (!((MyApp)getApplication()).isLoggedIn() && !(this instanceof LoginActivity)){
-            finish();
-        }
-        super.onResume();
-    }
-
-    public void restartActivity(){
-        Intent intent = getIntent();
-        finish();
-        startActivity(intent);
-    }
-
-    /**
-     * This is used so that the activity doesn't *appear* to be reloaded
-     */
-    public void softRestartActivity() {}
 }
